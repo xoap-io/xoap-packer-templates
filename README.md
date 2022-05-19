@@ -1,5 +1,5 @@
 [![Maintained](https://img.shields.io/badge/Maintained%20by-XOAP-success)](https://xoap.io)
-[![Terraform](https://img.shields.io/badge/Terraform-%3E%3D1.1.6-blue)](https://terraform.io)
+[![Packer](https://img.shields.io/badge/Packer-%3E%3D1.8.0-blue)](https://packer.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Table of Contents
@@ -17,11 +17,9 @@
 
 ## Introduction
 
-This is a template for Terraform modules.
+This is the XOAP Packer repository.
 
-It is part of our XOAP Automation Forces Open Source community library to give you a quick start into Infrastructure as Code deployments with Terraform.
-
-We have a lot of Terraform modules that are Open Source and maintained by the XOAP staff.
+It is part of our XOAP Automation Forces Open Source community library to give you a quick start into Infrastructure as Code deployments with Packer in addition to image.XO.
 
 Please check the links for more info, including usage information and full documentation:
 
@@ -64,7 +62,7 @@ Naming Conventions for Terraform resources must be used.
 
 ### Installation
 
-For the first ime using this template necessary tools need to be installed.
+For the first time using this template necessary tools need to be installed.
 A script for PowerShell Core is provided under ./build/init.ps1
 
 This script will install following dependencies:
@@ -88,46 +86,13 @@ This script configures:
 
 It currently supports the automated installation for macOS. Support for Windows and Linux will be available soon.
 
-### Synchronisation
+### Prerequisites
 
-We provided a script under ./build/sync_template.ps1 to fetch the latest changes from this template repository.
-Please be aware that this is mainly a copy operation which means all your current changes have to be committed first and after running the script you have to merge this changes into your codebase.
+All of the available Packer configurations are provided "as is" without any warranty.
 
-### Configuration
+They where tested and run with the following infrastrcture:
 
----
-
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
-
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.1.6 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.5.0 |
-
-## Providers
-
-No providers.
-
-## Modules
-
-No modules.
-
-## Resources
-
-No resources.
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_tags"></a> [tags](#input\_tags) | A list of Variables | `map(string)` | `{}` | no |
-
-## Outputs
-
-No outputs.
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-end -->
+- macOS Monterey 12.3.1
+- Hashicorp Packer 1.8.0
+- VMware Fusion Pro 12.3.3
+- Windows 10 21H2 Enterprise with Hyper-V
