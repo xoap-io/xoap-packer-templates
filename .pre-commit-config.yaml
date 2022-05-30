@@ -13,6 +13,8 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
+        args:
+          - --maxkb=4096
       - id: check-builtin-literals
       - id: check-byte-order-marker
       - id: check-json
@@ -26,24 +28,11 @@ repos:
       - id: pretty-format-json
       - id: detect-aws-credentials
       - id: no-commit-to-branch
-        args:
-          - -b master
+      - id: fix-byte-order-marker
       - id: no-commit-to-branch
         args:
-          - -b main
-  - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.62.0
-    hooks:
-      - id: terraform_fmt
-      - id: terraform_tflint
-        args:
-          - --args=--enable-plugin=aws
-      - id: terraform_docs
-        args:
-          - --hook-config=--path-to-file=README.md
-          - --hook-config=--add-to-existing-file=true
-          - --hook-config=--create-file-if-not-exist=true
-      - id: terraform_tfsec
+          - -b master
+      - id: check-case-conflict
   - repo: https://github.com/Checkmarx/kics
     rev: v1.5.4
     hooks:
