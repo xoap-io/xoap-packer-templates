@@ -644,11 +644,11 @@ build {
 
   post-processor "checksum" {
     checksum_types = ["sha1"]
-    output         = "packer_{{.BuildName}}_{{.ChecksumType}}.checksum"
+    output         = "./output/packer_{{.BuildName}}_{{.ChecksumType}}.checksum"
   }
 
   post-processor "manifest" {
-    output     = "${var.vm_name}.json"
+    output     = "./output/${var.vm_name}.json"
     strip_path = true
   }
 }

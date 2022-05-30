@@ -28,7 +28,7 @@
                 </Password>
                 <Enabled>true</Enabled>
                 <LogonCount>1</LogonCount>
-                <Username>xoap</Username>
+                <Username>xoap-admin</Username>
             </AutoLogon>
         </component>
     </settings>

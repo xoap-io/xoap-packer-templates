@@ -4,14 +4,13 @@
 
 # Table of Contents
 
-- [Introduction](#introduction)
-- [Guidelines](#guidelines)
-- [Requirements](#requirements)
-- [Providers](#providers)
-- [Modules](#modules)
-- [Resources](#resources)
-- [Inputs](#inputs)
-- [Outputs](#outputs)
+- [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guidelines](#guidelines)
+  - [Usage](#usage)
+    - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Windows Updates](#windows-updates)
 
 ---
 
@@ -96,3 +95,17 @@ They where tested and run with the following infrastrcture:
 - Hashicorp Packer 1.8.0
 - VMware Fusion Pro 12.3.3
 - Windows 10 21H2 Enterprise with Hyper-V
+
+### Windows Updates
+
+The filters for the Windows Updates are set as follows:
+
+filters = [
+"exclude:$_.Title -like '*Preview*'",
+"exclude:$_.Title -like '*Feature update*'",
+"include:$true",
+]
+
+If you want your images to be updated to the latest feature level remove to following line:
+
+"exclude:$\_.Title -like '_Feature update_'",

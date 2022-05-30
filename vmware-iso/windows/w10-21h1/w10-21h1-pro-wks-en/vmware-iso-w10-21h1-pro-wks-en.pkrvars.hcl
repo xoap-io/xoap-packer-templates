@@ -25,6 +25,7 @@ floppy_files = [
 floppy_dirs = []
 filters = [
   "exclude:$_.Title -like '*Preview*'",
+  "exclude:$_.Title -like '*Feature update*'",
   "include:$true",
 ]
 format               = ""
