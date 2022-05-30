@@ -4,14 +4,13 @@
 
 # Table of Contents
 
-- [Introduction](#introduction)
-- [Guidelines](#guidelines)
-- [Requirements](#requirements)
-- [Providers](#providers)
-- [Modules](#modules)
-- [Resources](#resources)
-- [Inputs](#inputs)
-- [Outputs](#outputs)
+- [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guidelines](#guidelines)
+  - [Usage](#usage)
+    - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Windows Updates](#windows-updates)
 
 ---
 
