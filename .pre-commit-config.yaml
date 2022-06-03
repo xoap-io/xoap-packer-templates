@@ -46,3 +46,8 @@ repos:
     hooks:
       - id: prettier
         stages: [commit]
+  - repo: https://github.com/xoap-io/pre-commit-packer
+    rev: v0.0.4
+    hooks:
+      - id: packer_validate
+      - id: packer_fmt
