@@ -97,6 +97,14 @@ They where tested and run with the following infrastrcture:
 - VMware Fusion Pro 12.3.3
 - Windows 10 21H2 Enterprise with Hyper-V
 
+### Pre-Commit-Hooks
+
+We added https://github.com/xoap-io/pre-commit-packer which enables validating and formating the packer configuration files.
+
+> Every time you commit a change to your packer configuration files, the pre-commit hook will run and validate the configuration.
+
+Additionally it is crucial to have a pkrvars.hcl and a pkr.hcl file in every subfolder so that the packer configuration files are correctly formatted and validated.
+
 ### Windows Updates
 
 The filters for the Windows Updates are set as follows:
@@ -110,3 +118,31 @@ filters = [
 If you want your images to be updated to the latest feature level remove to following line:
 
 "exclude:$\_.Title -like '_Feature update_'",
+
+### helper
+
+We added the KMS keys for the Windows based operating systems in helper/key-management-services.md
+
+You can also find all the ISO image related operating system Keys for the unattended.xml in the same directory.
+
+### amazon-ebs builder
+
+#### AMI-IDs
+
+> Be aware of the fact that AMI-Ids are region specific when defining them in the configuration.
+
+#### Username and Password
+
+> Don´t change the winrm user and password because "Administrator" must be specified and the password is generated during the Packer build.
+
+#### Sysprep and Password retrieval
+
+See https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch-v2.html for more information.
+
+#### AWS account access
+
+> We recommend using a local credentials file or assume a role instead of specifying access key and secret.
+
+### azure-arm builder
+
+### vmware-iso builder
