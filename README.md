@@ -7,10 +7,14 @@
 - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Guidelines](#guidelines)
-  - [Usage](#usage)
-    - [Installation](#installation)
-    - [Prerequisites](#prerequisites)
-    - [Windows Updates](#windows-updates)
+  - [Share the Love](#share-the-love)
+  - [Contributing](#contributing)
+  - [Bug Reports and Feature Requests](#bug-reports--feature-requests)
+  - [Developing](#developing)
+    - [Usage](#usage)
+      - [Installation](#installation)
+      - [Prerequisites](#prerequisites)
+      - [Windows Updates](#windows-updates)
 
 ---
 
@@ -18,7 +22,7 @@
 
 This is the XOAP Packer repository.
 
-It is part of our XOAP Automation Forces Open Source community library to give you a quick start into Infrastructure as Code deployments with Packer in addition to image.XO.
+It is part of our [XOAP](https://xoap.io) Automation Forces Open Source community library to give you a quick start into Infrastructure as Code deployments with Packer in addition to image.XO.
 
 Please check the links for more info, including usage information and full documentation:
 
@@ -45,15 +49,39 @@ he Conventional Commits specification is a lightweight convention on top of comm
 
 The better a Pull Request description is, the better a review can understand and decide on how to review the changes. This improves implementation speed and reduces communication between the requester and the reviewer resulting in much less overhead.
 
-[Wiriting A Great Pull Request Description](https://www.pullrequest.com/blog/writing-a-great-pull-request-description/)
+[Writing A Great Pull Request Description](https://www.pullrequest.com/blog/writing-a-great-pull-request-description/)
 
 Versioning is a crucial part for Terraform Stacks and Modules. Without version tags you cannot clearly create a stable environment and be sure that your latest changes won't crash your production environment (sure it still can happen, but we are trying our best to implement everything that we can to reduce the risk)
 
 [Semantic Versioning](https://semver.org)
 
-Naming Conventions for Terraform resources must be used.
+---
 
-[Terraform Naming Conventions](https://www.terraform-best-practices.com/naming)
+## Share the Love
+
+Like this project? Please give it a ★ on [our GitHub](https://github.com/xoap-io/xoap-uberagent-kibana-dashboards)! (it helps us a lot).
+
+---
+
+## Contributing
+
+### Bug Reports & Feature Requests
+
+Please use the issue tracker to report any bugs or file feature requests.
+
+### Developing
+
+If you are interested in being a contributor and want to get involved in developing this project, we would love to hear from you! Email us.
+
+PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
+
+- Fork the repo on GitHub
+- Clone the project to your own machine
+- Commit changes to your own branch
+- Push your work back up to your fork
+- Submit a Pull Request so that we can review your changes
+
+> NOTE: Be sure to merge the latest changes from "upstream" before making a pull request!
 
 ---
 
@@ -61,40 +89,26 @@ Naming Conventions for Terraform resources must be used.
 
 ### Installation
 
-For the first time using this template necessary tools need to be installed.
-A script for PowerShell Core is provided under ./build/init.ps1
-
-This script will install following dependencies:
-
-- [pre-commit](https://github.com/pre-commit/pre-commit)
-- [terraform-docs](https://github.com/terraform-docs/terraform-docs)
-- [tflint](https://github.com/terraform-linters/tflint)
-- [tfsec](https://github.com/aquasecurity/tfsec)
-- [checkov](https://github.com/bridgecrewio/checkov)
-- [terrascan](https://github.com/accurics/terrascan)
-- [kics](https://github.com/Checkmarx/kics)
-
-This script configures:
-
-- global git template under ~/.git-template
-- global pre-commit hooks for prepare-commit-msg and commit-msg under ~/.git-template/hooks
-- github actions:
-  - linting and checks for pull requests from dev to master/main
-  - automatic tagging and release creation on pushes to master/main
-  - dependabot updates
-
-It currently supports the automated installation for macOS. Support for Windows and Linux will be available soon.
+You can install Packer from the Hashicorp website: https://developer.hashicorp.com/packer/downloads?product_intent=packer.
 
 ### Prerequisites
 
-All of the available Packer configurations are provided "as is" without any warranty.
+All the available Packer configurations are provided "as is" without any warranty.
 
-They where tested and run with the following infrastrcture:
+They were tested and run with on following infrastructure:
 
-- macOS Monterey 12.3.1
+- macOS Ventura 13.3.1
 - Hashicorp Packer 1.8.0
 - VMware Fusion Pro 12.3.3
-- Windows 10 21H2 Enterprise with Hyper-V
+- Windows 10 22H2 Enterprise with Hyper-V
+
+### Pre-Commit-Hooks
+
+We added https://github.com/xoap-io/pre-commit-packer which enables validating and formating the packer configuration files.
+
+> Every time you commit a change to your packer configuration files, the pre-commit hook will run and validate the configuration.
+
+Additionally it is crucial to have a pkrvars.hcl and a pkr.hcl file in every subfolder so that the packer configuration files are correctly formatted and validated.
 
 ### Windows Updates
 
@@ -106,6 +120,34 @@ filters = [
 "include:$true",
 ]
 
-If you want your images to be updated to the latest feature level remove to following line:
+If you want your images to be updated to the latest feature level, remove the following line:
 
 "exclude:$\_.Title -like '_Feature update_'",
+
+### helper
+
+We added the KMS keys for the Windows based operating systems in helper/key-management-services.md
+
+You can also find all the ISO image related operating system Keys for the unattended.xml in the same directory.
+
+### amazon-ebs builder
+
+#### AMI-IDs
+
+> Be aware of the fact that AMI-Ids are region specific when defining them in the configuration.
+
+#### Username and Password
+
+> Don´t change the winrm user and password because "Administrator" must be specified and the password is generated during the Packer build.
+
+#### Sysprep and Password retrieval
+
+See https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch-v2.html for more information.
+
+#### AWS account access
+
+> We recommend using a local credentials file or assume a role instead of specifying access key and secret.
+
+### azure-arm builder
+
+### vmware-iso builder
