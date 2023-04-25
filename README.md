@@ -35,23 +35,32 @@ Please check the links for more info, including usage information and full docum
 
 ## Guidelines
 
-We are using the following guidelines to write code and make it easier for everyone to follow a destinctive guideline. Please check these links before starting to work on changes.
+We are using the following guidelines to write code and make it easier for everyone to follow a distinctive guideline.
+Please check these links before starting to work on changes.
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
-Git Naming Conventions are an important part of the development process. They descrtibe how Branched, Commit Messages, Pull Requests and Tags should look like to make the easily understandebla for everybody in the development chain.
+Git Naming Conventions are an important part of the development process.
+They describe how Branches, Commit Messages,
+Pull Requests and Tags should look like to make them easily understandable for everybody in the development chain.
 
 [Git Naming Conventions](https://namingconvention.org/git/)
 
-he Conventional Commits specification is a lightweight convention on top of commit messages. It provides an easy set of rules for creating an explicit commit history; which makes it easier to write automated tools on top of.
+He Conventional Commits specification is a lightweight convention on top of commit messages.
+It provides an easy set of rules for creating an explicit commit history; which makes it easier to write automated tools on top of.
 
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
-The better a Pull Request description is, the better a review can understand and decide on how to review the changes. This improves implementation speed and reduces communication between the requester and the reviewer resulting in much less overhead.
+The better a Pull Request description is, the better a review can understand and decide on how to review the changes.
+This improves implementation speed and reduces communication between the requester,
+and the reviewer is resulting in much less overhead.
 
 [Writing A Great Pull Request Description](https://www.pullrequest.com/blog/writing-a-great-pull-request-description/)
 
-Versioning is a crucial part for Terraform Stacks and Modules. Without version tags you cannot clearly create a stable environment and be sure that your latest changes won't crash your production environment (sure it still can happen, but we are trying our best to implement everything that we can to reduce the risk)
+Versioning is a crucial part for Terraform Stacks and Modules.
+Without version tags you cannot clearly create a stable environment
+and be sure that your latest changes will not crash your production environment (sure it still can happen,
+but we are trying our best to implement everything that we can to reduce the risk)
 
 [Semantic Versioning](https://semver.org)
 
@@ -59,7 +68,9 @@ Versioning is a crucial part for Terraform Stacks and Modules. Without version t
 
 ## Share the Love
 
-Like this project? Please give it a ★ on [our GitHub](https://github.com/xoap-io/xoap-uberagent-kibana-dashboards)! (it helps us a lot).
+Like this project? 
+Please give it a ★ on [our GitHub](https://github.com/xoap-io/xoap-uberagent-kibana-dashboards)! 
+It helps us a lot.
 
 ---
 
@@ -104,7 +115,7 @@ They were tested and run with on following infrastructure:
 
 ### Pre-Commit-Hooks
 
-We added https://github.com/xoap-io/pre-commit-packer which enables validating and formating the packer configuration files.
+We added https://github.com/xoap-io/pre-commit-packer which enables validating and formatting the packer configuration files.
 
 > Every time you commit a change to your packer configuration files, the pre-commit hook will run and validate the configuration.
 
@@ -134,11 +145,11 @@ You can also find all the ISO image related operating system Keys for the unatte
 
 #### AMI-IDs
 
-> Be aware of the fact that AMI-Ids are region specific when defining them in the configuration.
+> Be aware of the fact that AMI-Ids are region-specific when defining them in the configuration.
 
 #### Username and Password
 
-> Don´t change the winrm user and password because "Administrator" must be specified and the password is generated during the Packer build.
+> Do not change the winrm user and password because "Administrator" must be specified and the password is generated during the Packer build.
 
 #### Sysprep and Password retrieval
 
@@ -146,7 +157,7 @@ See https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch-v2.html for
 
 #### AWS account access
 
-> We recommend using a local credentials file or assume a role instead of specifying access key and secret.
+> We recommend using a local credentials file or assuming a role instead of specifying an access key and secret.
 
 ### azure-arm builder
 
