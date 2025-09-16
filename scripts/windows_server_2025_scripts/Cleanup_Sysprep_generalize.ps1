@@ -26,11 +26,11 @@ try {
     if (-not (Test-Path $LogDir)) {
         New-Item -Path $LogDir -ItemType Directory -Force | Out-Null
     }
-
+    
     $scriptName = [IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
     $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
     $LogFile = Join-Path $LogDir "$scriptName-$timestamp.log"
-
+    
     Start-Transcript -Path $LogFile -Append | Out-Null
     Write-Host "Logging to: $LogFile"
 } catch {
@@ -54,49 +54,7 @@ trap {
 
 try {
     Write-Log 'Starting final cleanup and sysprep'
-
-    # Final cleanup before sysprep
-    Write-Log 'Performing final system cleanup...'
-
-    # Final cleanup before sysprep
-    Write-Log 'Performing final system cleanup...'
-
-    # Clear additional temp locations (temp drives removed)
-    $cleanupPaths = @(
-        "C:\Windows\Logs\*",
-        "C:\Windows\Panther\*",
-        "C:\Windows\SoftwareDistribution\Download\*"
-    )
-
-    foreach ($path in $cleanupPaths) {
-        try {
-            if (Test-Path (Split-Path $path -Parent)) {
-                $items = Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue
-                if ($items) {
-                    Write-Log "Cleaning $path - $($items.Count) items"
-                    $items | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-                }
-            }
-        } catch {
-            Write-Log "Warning: Could not clean $path`: $($_.Exception.Message)"
-        }
-    }
-
-    # Clear event logs one final time
-    Write-Log 'Clearing event logs...'
-    try {
-        Get-WinEvent -ListLog * | Where-Object { $_.RecordCount -gt 0 } | ForEach-Object {
-            try {
-                [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($_.LogName)
-            } catch {
-                # Some logs cannot be cleared
-            }
-        }
-        Write-Log 'Event logs cleared'
-    } catch {
-        Write-Log "Warning: Could not clear all event logs"
-    }
-
+     
     # Defragment system drive
     Write-Log 'Optimizing system drive...'
     try {
@@ -105,27 +63,38 @@ try {
     } catch {
         Write-Log "Warning: Could not optimize system drive: $($_.Exception.Message)"
     }
-
+    
     Write-Log 'Final cleanup completed, preparing for sysprep...'
-
+      
     # Stop transcript before sysprep
     try { Stop-Transcript | Out-Null } catch {}
-
+    
     # Prepare sysprep command
     $sysprepPath = Join-Path $env:WINDIR "System32\Sysprep\sysprep.exe"
-    $sysprepArgs = @('/generalize', '/shutdown', '/quiet')
+    $sysprepArgs = @('/generalize', '/quit')
+    #     $sysprepArgs = @('/generalize', '/quit', '/unattend:C:\Windows\System32\Sysprep\unattend.xml')
 
     Write-Log "Running sysprep with arguments: $($sysprepArgs -join ' ')"
     Write-Log "This will shutdown the system when complete"
-
-    # Run sysprep
-    & $sysprepPath $sysprepArgs
-
-    if ($LASTEXITCODE -ne 0) {
-        Write-Log "Sysprep failed with exit code: $LASTEXITCODE"
-        exit $LASTEXITCODE
-    }
-
+    
+        # Check if sysprep.exe exists
+        if (Test-Path $sysprepPath) {
+            # Run sysprep using Start-Process for better error handling
+            $process = Start-Process -FilePath $sysprepPath -ArgumentList $sysprepArgs -Wait -PassThru
+            $exitCode = $process.ExitCode
+            if ($null -eq $exitCode) {
+                # Fallback to $LASTEXITCODE if ExitCode is not set
+                $exitCode = $LASTEXITCODE
+            }
+            if ($exitCode -ne 0) {
+                Write-Log "Sysprep failed with exit code: $exitCode"
+                exit $exitCode
+            }
+        } else {
+            Write-Log "Sysprep executable not found at $sysprepPath"
+            exit 1
+        }
+    
 } catch {
     Write-Log "Critical error in final cleanup: $($_.Exception.Message)"
     try { Stop-Transcript | Out-Null } catch {}
