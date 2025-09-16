@@ -68,8 +68,8 @@ but we are trying our best to implement everything that we can to reduce the ris
 
 ## Share the Love
 
-Like this project? 
-Please give it a ★ on [our GitHub](https://github.com/xoap-io/xoap-uberagent-kibana-dashboards)! 
+Like this project?
+Please give it a ★ on [our GitHub](https://github.com/xoap-io/xoap-uberagent-kibana-dashboards)!
 It helps us a lot.
 
 ---

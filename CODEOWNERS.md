@@ -1,3 +1,2 @@
-* @ssokolic
-* @xoap-io
-* 
+- @ssokolic
+- @xoap-io
